@@ -104,9 +104,11 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -127,20 +129,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="framework.h" />
-    <ClInclude Include="Horologer-NTP.h" />
-    <ClInclude Include="Resource.h" />
-    <ClInclude Include="targetver.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="Horologer-NTP.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Horologer-NTP.rc" />
+    <Image Include="Horologer.ico" />
+    <Image Include="HorologerTransparent.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Horologer-NTP.ico" />
-    <Image Include="small.ico" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="UtilityFuncs.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Horologer-NTP.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
