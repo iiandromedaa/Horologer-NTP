@@ -106,9 +106,10 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>
       </AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -129,6 +130,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Form.cpp" />
     <ClCompile Include="Horologer-NTP.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -136,11 +138,17 @@
     <Image Include="HorologerTransparent.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="libconfig.hh" />
+    <ClInclude Include="NTP.h" />
+    <ClInclude Include="ping.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="UtilityFuncs.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Horologer-NTP.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="config.cfg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

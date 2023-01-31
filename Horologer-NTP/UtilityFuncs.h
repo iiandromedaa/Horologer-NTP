@@ -12,4 +12,8 @@ class utils {
 			ctime_s(ctimeBuffer, size, &timeUnix);
 			return ctimeBuffer;
 		}
+		static void sysPing(string target) {
+			string sysPingCmd = "ping " + target;
+			system(sysPingCmd.c_str());
+		}
 };

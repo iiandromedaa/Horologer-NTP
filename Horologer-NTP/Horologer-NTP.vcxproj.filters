@@ -18,6 +18,9 @@
     <ClCompile Include="Horologer-NTP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Form.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Horologer.ico">
@@ -34,10 +37,24 @@
     <ClInclude Include="UtilityFuncs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="NTP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="libconfig.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ping.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Horologer-NTP.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="config.cfg">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
