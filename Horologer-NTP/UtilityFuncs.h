@@ -8,5 +8,8 @@ typedef std::string string;
 
 class utils {
 	public:
-		string toDTstr(time_t timeUnix);
+		static char* toDTstr(time_t timeUnix, size_t size, char* ctimeBuffer) {
+			ctime_s(ctimeBuffer, size, &timeUnix);
+			return ctimeBuffer;
+		}
 };
