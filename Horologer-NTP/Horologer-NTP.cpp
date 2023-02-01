@@ -7,15 +7,11 @@
 #include <thread>
 
 #include "UtilityFuncs.h"
-//#include "libconfig.hh"
-#include "ping.h"
-
 
 const int BUFFER_SIZE = 32;
 char server_ip[BUFFER_SIZE]{"192.168.1.1"};
 
 typedef std::string string;
-//using namespace libconfig;
 
 void clockloop();
 void pingtest(string); //RETURNS void PARAMS string address
@@ -30,7 +26,6 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
 {
-    ping(server_ip);
     // Register the window class.
     const wchar_t CLASS_NAME[] = L"Sample Window Class";
 
@@ -47,7 +42,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     HWND hwnd = CreateWindowEx(
         0,                              // Optional window styles.
         CLASS_NAME,                     // Window class
-        L"Learn to Program Windows",    // Window text
+        L"Horologer NTP",    // Window text
         WS_OVERLAPPEDWINDOW,            // Window style
 
         // Size and position
