@@ -8,28 +8,34 @@
 
 #include "UtilityFuncs.h"
 
+//DEFINES
+
 const int BUFFER_SIZE = 32;
 char server_ip[BUFFER_SIZE]{"192.168.1.1"};
 
 typedef std::string string;
 
-void clockloop();
-void pingtest(string); //RETURNS void PARAMS string address
+#define ALARM_MENU_SET 1
+#define SETTING_MENU_NTP 2
+#define SETTING_MENU_DISP 3
+#define HELP_MENU_ABOUT 4
 
 #ifndef UNICODE
 #define UNICODE
 #endif 
 
-#include <windows.h>
-
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-void AddMenus();
+void clockloop();
+void pingtest(string); //RETURNS void PARAMS string address
+void AddMenus(HWND);
+
+HMENU hMenu;
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
 {
     // Register the window class.
-    const wchar_t CLASS_NAME[] = L"Sample Window Class";
+    const wchar_t CLASS_NAME[] = L"MainWindow";
 
     WNDCLASS wc = { };
 
@@ -48,7 +54,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
         WS_OVERLAPPEDWINDOW,            // Window style
 
         // Size and position
-        CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
+        CW_USEDEFAULT, CW_USEDEFAULT, 600, 600,
 
         NULL,       // Parent window    
         NULL,       // Menu
@@ -79,6 +85,20 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     switch (uMsg)
     {
+    case WM_COMMAND:
+        switch (wParam) {
+            case 1:
+                MessageBeep(MB_OK);
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+        }
+        break;
+    case WM_CREATE:
+        AddMenus(hwnd);
+        break;
     case WM_DESTROY:
         PostQuitMessage(0);
         return 0;
@@ -100,8 +120,22 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
 
-void AddMenus() {
+void AddMenus(HWND hWnd) {
+    hMenu = CreateMenu();
+    HMENU hAlarmsMenu = CreateMenu();
+    HMENU hSettingsMenu = CreateMenu();
+    HMENU hHelpMenu = CreateMenu();
+;
+    AppendMenuW(hMenu, MF_POPUP, (UINT_PTR)hAlarmsMenu, L"Alarms");
+    AppendMenuW(hMenu, MF_POPUP, (UINT_PTR)hSettingsMenu, L"Settings");
+    AppendMenuW(hMenu, MF_POPUP, (UINT_PTR)hHelpMenu, L"Help");
 
+    AppendMenuW(hAlarmsMenu, MF_STRING, ALARM_MENU_SET, L"Set Alarms");
+    AppendMenuW(hSettingsMenu, MF_STRING, SETTING_MENU_NTP, L"NTP Settings");
+    AppendMenuW(hSettingsMenu, MF_STRING, SETTING_MENU_DISP, L"Display Settings");
+    AppendMenuW(hHelpMenu, MF_STRING, HELP_MENU_ABOUT, L"About");
+
+    SetMenu(hWnd, hMenu);
 }
 
 void clockloop() {
