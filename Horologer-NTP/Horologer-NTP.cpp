@@ -24,6 +24,8 @@ void pingtest(string); //RETURNS void PARAMS string address
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
+void AddMenus();
+
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
 {
     // Register the window class.
@@ -98,12 +100,8 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
 
-int main() {
-	//std::thread thr(ping(server_ip));
-	for (int i = 0; i < 20; i++) {
-		clockloop();
-		Sleep(750);
-	}
+void AddMenus() {
+
 }
 
 void clockloop() {
