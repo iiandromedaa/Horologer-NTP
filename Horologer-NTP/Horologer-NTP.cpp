@@ -25,12 +25,16 @@ typedef std::string string;
 #endif 
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+LRESULT CALLBACK WindowProcAbout(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 void clockloop();
 void pingtest(string); //RETURNS void PARAMS string address
 void AddMenus(HWND);
+void CreateAboutWindow(HINSTANCE);
+bool AboutWindowOpen = false;
 
 HMENU hMenu;
+HINSTANCE Minstance;
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
 {
@@ -42,8 +46,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     wc.lpfnWndProc = WindowProc;
     wc.hInstance = hInstance;
     wc.lpszClassName = CLASS_NAME;
-
     RegisterClass(&wc);
+    Minstance = hInstance;
+
+    wc.hbrBackground = (HBRUSH)COLOR_BACKGROUND;
 
     // Create the window.
 
@@ -56,7 +62,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
         // Size and position
         CW_USEDEFAULT, CW_USEDEFAULT, 600, 600,
 
-        NULL,       // Parent window    
+        HWND_DESKTOP,       // Parent window    
         NULL,       // Menu
         hInstance,  // Instance handle
         NULL        // Additional application data
@@ -81,6 +87,44 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     return 0;
 }
 
+void CreateAboutWindow(HINSTANCE hInstance, HWND ParentWindow) {
+    
+    const wchar_t ABOUT_CLASS[] = L"AboutWindow";
+
+    WNDCLASS wcabout = { };
+
+    wcabout.lpfnWndProc = WindowProcAbout;
+    wcabout.hInstance = hInstance;
+    wcabout.lpszClassName = ABOUT_CLASS;
+
+    RegisterClass(&wcabout);
+
+    wcabout.hbrBackground = (HBRUSH)(COLOR_BACKGROUND+1);
+
+    HWND hwndabout = CreateWindowEx(
+        0,                              // Optional window styles.
+        ABOUT_CLASS,                     // Window class
+        L"About",    // Window text
+        WS_OVERLAPPEDWINDOW,            // Window style
+
+        // Size and position
+        CW_USEDEFAULT, CW_USEDEFAULT, 400, 150,
+
+        NULL,       // Parent window    
+        NULL,       // Menu
+        hInstance,  // Instance handle
+        NULL        // Additional application data
+    );
+    SetMenu(hwndabout, NULL);
+    ShowWindow(hwndabout, SW_SHOW);
+    MSG msg = { };
+    while (GetMessage(&msg, NULL, 0, 0) > 0)
+    {
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+    }
+}
+
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     switch (uMsg)
@@ -94,15 +138,23 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 break;
             case 3:
                 break;
+            case 4:
+                if (!AboutWindowOpen) {
+                    AboutWindowOpen = true;
+                    CreateAboutWindow(GetModuleHandle(NULL), hwnd);
+                }
+                break;
         }
         break;
     case WM_CREATE:
         AddMenus(hwnd);
         break;
     case WM_DESTROY:
-        PostQuitMessage(0);
+        ExitProcess(0);
         return 0;
-
+    case WM_CLOSE:
+        DestroyWindow(hwnd);
+        break;
     case WM_PAINT:
     {
         PAINTSTRUCT ps;
@@ -116,6 +168,34 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     }
     return 0;
 
+    }
+    return DefWindowProc(hwnd, uMsg, wParam, lParam);
+}
+
+LRESULT CALLBACK WindowProcAbout(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+    switch (uMsg)
+    {
+    case WM_CREATE:
+        break;
+    case WM_DESTROY:
+        AboutWindowOpen = false;
+        return 0;
+    case WM_CLOSE:
+        DestroyWindow(hwnd);
+        break;
+    case WM_PAINT:
+    {
+        PAINTSTRUCT ps;
+        HDC hdc = BeginPaint(hwnd, &ps);
+
+        // All painting occurs here, between BeginPaint and EndPaint.
+
+        FillRect(hdc, &ps.rcPaint, (HBRUSH)(COLOR_WINDOW + 1));
+
+        EndPaint(hwnd, &ps);
+    }
+    return 0;
     }
     return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
