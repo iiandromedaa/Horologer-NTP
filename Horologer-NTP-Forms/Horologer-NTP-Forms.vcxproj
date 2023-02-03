@@ -23,8 +23,9 @@
     <ProjectGuid>{9b11fb08-508e-4e1a-b3d6-0040ba8c6896}</ProjectGuid>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <Keyword>ManagedCProj</Keyword>
-    <RootNamespace>Horologer_NTP_Forms</RootNamespace>
+    <RootNamespace>Horologer_NTP</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Horologer-NTP</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -130,18 +131,23 @@
     <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="configparser.hpp" />
-    <ClInclude Include="HorologerMain.h">
+    <ClInclude Include="AboutWindow.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="MainWindow.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="pch.h" />
     <ClInclude Include="resource1.h" />
+    <ClInclude Include="SimpleIni.h" />
     <ClInclude Include="UtilityFuncs.h" />
+    <ClInclude Include="wndstatus.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AboutWindow.cpp" />
     <ClCompile Include="AssemblyInfo.cpp" />
-    <ClCompile Include="configparser.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -152,7 +158,9 @@
   <ItemGroup>
     <Image Include="Horologer.ico" />
     <Image Include="HorologerTransparent.ico" />
+    <Image Include="Icon.png" />
     <Image Include="icon1.ico" />
+    <Image Include="Icon96.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -162,8 +170,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="HorologerMain.resx">
-      <DependentUpon>HorologerMain.h</DependentUpon>
+    <EmbeddedResource Include="AboutWindow.resx">
+      <DependentUpon>AboutWindow.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow.resx">
+      <DependentUpon>MainWindow.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

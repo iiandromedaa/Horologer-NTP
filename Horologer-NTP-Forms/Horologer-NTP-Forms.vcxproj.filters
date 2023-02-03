@@ -23,16 +23,22 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HorologerMain.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="UtilityFuncs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="configparser.hpp">
+    <ClInclude Include="resource1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="resource1.h">
+    <ClInclude Include="MainWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AboutWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleIni.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wndstatus.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -46,7 +52,10 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="configparser.cpp">
+    <ClCompile Include="MainWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AboutWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -58,6 +67,12 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="icon1.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Icon.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Icon96.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
