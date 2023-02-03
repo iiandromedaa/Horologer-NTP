@@ -12,7 +12,6 @@
 //DEFINES
 
 typedef std::string string;
-typedef std::wstring wstring;    
 
 string path = "config.ini";
 // Initialize the parser with a path to the configuration file
@@ -203,10 +202,10 @@ LRESULT CALLBACK WindowProcAbout(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
         HDC hdc = BeginPaint(hwnd, &ps);
 
         // All painting occurs here, between BeginPaint and EndPaint.
+        //std::vector<LPCWSTR> aboutText;
+        TCHAR aboutText[] = L"Hello World!";
+            TextOut(hdc, 50, 37.5, aboutText, _tcslen(aboutText));
 
-        string versionNum = parser.aConfig<std::string>("settings", "version");
-        wstring wstringVersionNum = utils::wstringer(versionNum);
-        TextOut(hdc, 50, 37.5, wstringVersionNum.c_str(), _tcslen(wstringVersionNum.c_str()));
         //FillRect(hdc, &ps.rcPaint, (HBRUSH)(COLOR_WINDOW + 1));
 
         EndPaint(hwnd, &ps);

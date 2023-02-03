@@ -16,7 +16,4 @@ class utils {
 			string sysPingCmd = "ping " + target;
 			system(sysPingCmd.c_str());
 		}
-		static std::wstring wstringer(const std::string& text) {
-			return std::wstring(text.begin(), text.end());
-		}
 };
