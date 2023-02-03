@@ -127,19 +127,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ResourceCompile Include="app.rc" />
+    <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Form1.h">
+    <ClInclude Include="configparser.hpp" />
+    <ClInclude Include="HorologerMain.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Resource.h" />
+    <ClInclude Include="resource1.h" />
+    <ClInclude Include="UtilityFuncs.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
-    <ClCompile Include="CppCLR_WinFormsProject.cpp" />
-    <ClCompile Include="Form1.cpp" />
+    <ClCompile Include="configparser.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -148,8 +150,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\Horologer-NTP\Horologer.ico" />
-    <Image Include="app.ico" />
+    <Image Include="Horologer.ico" />
+    <Image Include="HorologerTransparent.ico" />
+    <Image Include="icon1.ico" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -159,8 +162,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.h</DependentUpon>
+    <EmbeddedResource Include="HorologerMain.resx">
+      <DependentUpon>HorologerMain.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

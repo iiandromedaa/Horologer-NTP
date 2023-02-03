@@ -15,23 +15,29 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="app.rc">
+    <ResourceCompile Include="Resource.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Form1.h">
+    <ClInclude Include="HorologerMain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UtilityFuncs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="configparser.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CppCLR_WinFormsProject.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -40,15 +46,18 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Form1.cpp">
+    <ClCompile Include="configparser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="app.ico">
+    <Image Include="Horologer.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="..\Horologer-NTP\Horologer.ico">
+    <Image Include="HorologerTransparent.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="icon1.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

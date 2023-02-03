@@ -59,14 +59,15 @@ namespace CppCLRWinFormsProject {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Form1::typeid));
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
-			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->aboutToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->changeNTPServerToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->clockLayoutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->alarmsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->setAlarmsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->changeNTPServerToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->clockLayoutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->aboutToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -82,6 +83,20 @@ namespace CppCLRWinFormsProject {
 			this->menuStrip1->TabIndex = 0;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
+			// alarmsToolStripMenuItem
+			// 
+			this->alarmsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->setAlarmsToolStripMenuItem });
+			this->alarmsToolStripMenuItem->Name = L"alarmsToolStripMenuItem";
+			this->alarmsToolStripMenuItem->Size = System::Drawing::Size(56, 20);
+			this->alarmsToolStripMenuItem->Text = L"Alarms";
+			// 
+			// setAlarmsToolStripMenuItem
+			// 
+			this->setAlarmsToolStripMenuItem->Name = L"setAlarmsToolStripMenuItem";
+			this->setAlarmsToolStripMenuItem->Size = System::Drawing::Size(130, 22);
+			this->setAlarmsToolStripMenuItem->Text = L"Set Alarms";
+			this->setAlarmsToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::setAlarmsToolStripMenuItem_Click);
+			// 
 			// aboutToolStripMenuItem
 			// 
 			this->aboutToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
@@ -93,6 +108,19 @@ namespace CppCLRWinFormsProject {
 			this->aboutToolStripMenuItem->Text = L"Settings";
 			this->aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::aboutToolStripMenuItem_Click);
 			// 
+			// changeNTPServerToolStripMenuItem
+			// 
+			this->changeNTPServerToolStripMenuItem->Name = L"changeNTPServerToolStripMenuItem";
+			this->changeNTPServerToolStripMenuItem->Size = System::Drawing::Size(143, 22);
+			this->changeNTPServerToolStripMenuItem->Text = L"NTP Server";
+			this->changeNTPServerToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::changeNTPServerToolStripMenuItem_Click);
+			// 
+			// clockLayoutToolStripMenuItem
+			// 
+			this->clockLayoutToolStripMenuItem->Name = L"clockLayoutToolStripMenuItem";
+			this->clockLayoutToolStripMenuItem->Size = System::Drawing::Size(143, 22);
+			this->clockLayoutToolStripMenuItem->Text = L"Clock Layout";
+			// 
 			// helpToolStripMenuItem
 			// 
 			this->helpToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->aboutToolStripMenuItem1 });
@@ -103,45 +131,20 @@ namespace CppCLRWinFormsProject {
 			// aboutToolStripMenuItem1
 			// 
 			this->aboutToolStripMenuItem1->Name = L"aboutToolStripMenuItem1";
-			this->aboutToolStripMenuItem1->Size = System::Drawing::Size(180, 22);
+			this->aboutToolStripMenuItem1->Size = System::Drawing::Size(107, 22);
 			this->aboutToolStripMenuItem1->Text = L"About";
-			// 
-			// changeNTPServerToolStripMenuItem
-			// 
-			this->changeNTPServerToolStripMenuItem->Name = L"changeNTPServerToolStripMenuItem";
-			this->changeNTPServerToolStripMenuItem->Size = System::Drawing::Size(180, 22);
-			this->changeNTPServerToolStripMenuItem->Text = L"NTP Server";
-			this->changeNTPServerToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::changeNTPServerToolStripMenuItem_Click);
-			// 
-			// clockLayoutToolStripMenuItem
-			// 
-			this->clockLayoutToolStripMenuItem->Name = L"clockLayoutToolStripMenuItem";
-			this->clockLayoutToolStripMenuItem->Size = System::Drawing::Size(180, 22);
-			this->clockLayoutToolStripMenuItem->Text = L"Clock Layout";
-			// 
-			// alarmsToolStripMenuItem
-			// 
-			this->alarmsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->setAlarmsToolStripMenuItem });
-			this->alarmsToolStripMenuItem->Name = L"alarmsToolStripMenuItem";
-			this->alarmsToolStripMenuItem->Size = System::Drawing::Size(56, 20);
-			this->alarmsToolStripMenuItem->Text = L"Alarms";
-			// 
-			// setAlarmsToolStripMenuItem
-			// 
-			this->setAlarmsToolStripMenuItem->Name = L"setAlarmsToolStripMenuItem";
-			this->setAlarmsToolStripMenuItem->Size = System::Drawing::Size(180, 22);
-			this->setAlarmsToolStripMenuItem->Text = L"Set Alarms";
-			this->setAlarmsToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::setAlarmsToolStripMenuItem_Click);
 			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::SystemColors::Control;
 			this->ClientSize = System::Drawing::Size(695, 448);
 			this->Controls->Add(this->menuStrip1);
 			this->Cursor = System::Windows::Forms::Cursors::Default;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"Form1";
-			this->Text = L"Form1";
+			this->Text = L"Horologer NTP";
 			this->Load += gcnew System::EventHandler(this, &Form1::Form1_Load);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
