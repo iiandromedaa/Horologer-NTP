@@ -1,3 +1,4 @@
+using static Horologer_NTP.AboutBox1;
 namespace Horologer_NTP
 {
     public partial class Form1 : Form
@@ -15,6 +16,14 @@ namespace Horologer_NTP
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AboutBox1.aboutOpen == false) {
+                new AboutBox1().Show();
+                aboutOpen = true;
+            }
         }
     }
 }
