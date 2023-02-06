@@ -1,3 +1,6 @@
+using System.Net.NetworkInformation;
+using static Horologer_NTP.Form1;
+
 namespace Horologer_NTP
 {
     internal static class Program
@@ -11,33 +14,21 @@ namespace Horologer_NTP
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            Form1 main = new Form1();
+            Application.Run(main);
+            main.UpdateTime();
+
         }
-
-        private static void ShowSplash()
+        static Array Ping(string IP)
         {
-            Splash sp = new Splash();
-            sp.Show();
-            Application.DoEvents();
-
-            System.Windows.Forms.Timer t = new System.Windows.Forms.Timer();
-            t.Interval = 1000;
-            t.Tick += new EventHandler((sender, ea) =>
-            {
-                sp.BeginInvoke(new Action(() =>
-                {
-                    if (sp != null && Application.OpenForms.Count > 1)
-                    {
-                        sp.Close();
-                        sp.Dispose();
-                        sp = null;
-                        t.Stop();
-                        t.Dispose();
-                        t = null;
-                    }
-                }));
-            });
-            t.Start();
+            Ping NTP = new Ping();
+            PingReply pingReplyping = NTP.Send(IP);
+            Console.WriteLine("Status :  " + pingReplyping.Status + 
+            " \n Time : " + pingReplyping.RoundtripTime.ToString() + 
+            " \n Address : " + pingReplyping.Address);
+            string[] array = { pingReplyping.RoundtripTime.ToString(), pingReplyping.Status.ToString() };
+            return array;
+            //return pingReplyping.RoundtripTime;
         }
     }
 }
