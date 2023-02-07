@@ -3,17 +3,16 @@ using System.Diagnostics;
 using System.Net.NetworkInformation;
 using static Horologer_NTP.AboutBox1;
 using static Horologer_NTP.Program;
+using static Horologer_NTP.IniFile;
 namespace Horologer_NTP
 {
     public partial class Form1 : Form
     {
+        static IniFile myini = new IniFile("config.ini");
+        public static string NTP = myini.Read("NTP", "settings");
         public Form1()
         {
             InitializeComponent();
-            var worker = new BackgroundWorker();
-            worker.DoWork += new DoWorkEventHandler(threadwork);
-            worker.RunWorkerAsync();
-            //Stopwatcher();
         }
 
         private void time_Click(object sender, EventArgs e)
@@ -34,31 +33,48 @@ namespace Horologer_NTP
         }
         public void UpdateTime()
         {
-            DateTime server = GetNetworkTime("time.windows.com");
+            //string ip = myini.Read("NTP", "settings");
+            DateTime server = GetNetworkTime2(NTP);
+            accuracyMS.Text = Beancounter(server).ToString("+#;-#;0") + " ms";
             time.Text = server.ToLocalTime().ToString("hh:mm:ss tt");
+        }
+        public double Beancounter(DateTime server)
+        {
+            long serverlong = new DateTimeOffset(server).ToUnixTimeMilliseconds();
+            long locallong = new DateTimeOffset(DateTime.Now).ToUnixTimeMilliseconds();
+            return (double)locallong - serverlong;
+        }
+        public void UpdatePing(double ping)
+        {
+            lagMS.Text = ping.ToString() + " ms";
         }
 
         public async Task Stopwatcher()
         {
             while (true)
             {
-                var delayTask = Task.Delay(1000);
+                var delayTask = Task.Delay(500);
                 UpdateTime();
                 await delayTask; // wait until at least 10s elapsed since delayTask created
             }
         }
 
-        void threadwork(object sender, DoWorkEventArgs e)
+        public async Task Pingwatcher()
         {
             while (true)
             {
-                System.Threading.Thread.Sleep(100);
-                DateTime server = GetNetworkTime("time.windows.com");
-                //Pinger("time.windows.com");
-                //time.Text = server.ToLocalTime().ToString("hh:mm:ss tt");
-                this.time.Invoke((MethodInvoker)delegate { time.Text = server.ToLocalTime().ToString("hh:mm:ss tt"); });
-                //UpdateTime();
+                var delayTask = Task.Delay(500);
+                //string ip = myini.Read("NTP", "settings");
+                //0.north-america.pool.ntp.org
+                UpdatePing(Pinger(NTP));
+                await delayTask;
             }
+        }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            Stopwatcher();
+            Pingwatcher();
         }
     }
 }

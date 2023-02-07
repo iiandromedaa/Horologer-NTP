@@ -88,8 +88,15 @@ namespace Horologer_NTP
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            this.Close();
             aboutOpen = false;
+            this.Close();
+            this.Dispose();
+        }
+
+        private void AboutBox1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            aboutOpen = false;
+            this.Dispose();
         }
     }
 }
