@@ -26,7 +26,7 @@ namespace Horologer_NTP
             Ping Pong = new Ping();
             try
             {
-                PingReply pingReplyping = Pong.Send(ip, 500);
+                PingReply pingReplyping = Pong.Send(ip, 450);
                 if (pingReplyping.Status != IPStatus.Success)
                 {
                     return -1;

@@ -33,7 +33,6 @@ namespace Horologer_NTP
         }
         public void UpdateTime()
         {
-            //string ip = myini.Read("NTP", "settings");
             DateTime server = GetNetworkTime2(NTP);
             accuracyMS.Text = Beancounter(server).ToString("+#;-#;0") + " ms";
             time.Text = server.ToLocalTime().ToString("hh:mm:ss tt");
@@ -64,7 +63,6 @@ namespace Horologer_NTP
             while (true)
             {
                 var delayTask = Task.Delay(500);
-                //string ip = myini.Read("NTP", "settings");
                 //0.north-america.pool.ntp.org
                 UpdatePing(Pinger(NTP));
                 await delayTask;
@@ -75,6 +73,24 @@ namespace Horologer_NTP
         {
             Stopwatcher();
             Pingwatcher();
+            //BackgroundWorker bgPing = new BackgroundWorker();
+            //bgPing.DoWork += Workerping;
+            //bgPing.RunWorkerAsync();
+        }
+
+        private void Workerping(object sender, DoWorkEventArgs e)
+        {
+            while (true)
+            {
+                //string ip = myini.Read("NTP", "settings");
+                //0.north-america.pool.ntp.org
+                //UpdatePing(Pinger(NTP));
+                lagMS.Invoke((MethodInvoker)delegate
+                {
+                    lagMS.Text = Pinger(NTP).ToString() + " ms";
+                });
+                Thread.Sleep(1000);
+            }
         }
     }
 }
