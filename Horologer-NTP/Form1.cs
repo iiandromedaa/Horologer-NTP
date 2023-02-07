@@ -1,9 +1,12 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Net.NetworkInformation;
+using System.Threading;
 using static Horologer_NTP.AboutBox1;
 using static Horologer_NTP.Program;
 using static Horologer_NTP.IniFile;
+using System.Timers;
+
 namespace Horologer_NTP
 {
     public partial class Form1 : Form
@@ -52,7 +55,7 @@ namespace Horologer_NTP
         {
             while (true)
             {
-                var delayTask = Task.Delay(500);
+                var delayTask = Task.Delay(300, default);
                 UpdateTime();
                 await delayTask; // wait until at least 10s elapsed since delayTask created
             }
@@ -62,20 +65,16 @@ namespace Horologer_NTP
         {
             while (true)
             {
-                var delayTask = Task.Delay(500);
+                var delayTask = Task.Delay(1000, default);
                 //0.north-america.pool.ntp.org
                 UpdatePing(Pinger(NTP));
                 await delayTask;
             }
         }
-
         private void Form1_Shown(object sender, EventArgs e)
         {
             Stopwatcher();
             Pingwatcher();
-            //BackgroundWorker bgPing = new BackgroundWorker();
-            //bgPing.DoWork += Workerping;
-            //bgPing.RunWorkerAsync();
         }
 
         private void Workerping(object sender, DoWorkEventArgs e)
