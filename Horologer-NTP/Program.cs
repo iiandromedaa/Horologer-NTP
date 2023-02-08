@@ -1,9 +1,6 @@
-using System.Data;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
-using static Horologer_NTP.Form1;
-using static Horologer_NTP.IniFile;
 
 namespace Horologer_NTP
 {
@@ -31,7 +28,7 @@ namespace Horologer_NTP
                 {
                     return -1;
                 }
-                return pingReplyping.RoundtripTime; 
+                return pingReplyping.RoundtripTime;
             }
             catch (System.Net.NetworkInformation.PingException)
             {
@@ -67,6 +64,10 @@ namespace Horologer_NTP
                     socket.Receive(ntpData);
                     socket.Close();
                 }
+            }
+            catch (SocketException e)
+            {
+                return DateTime.Now;
             }
             catch (Exception e)
             {

@@ -1,11 +1,6 @@
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Net.NetworkInformation;
-using System.Threading;
 using static Horologer_NTP.AboutBox1;
 using static Horologer_NTP.Program;
-using static Horologer_NTP.IniFile;
-using System.Timers;
 
 namespace Horologer_NTP
 {
@@ -29,7 +24,8 @@ namespace Horologer_NTP
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!aboutOpen) {
+            if (!aboutOpen)
+            {
                 new AboutBox1().Show();
                 aboutOpen = true;
             }
