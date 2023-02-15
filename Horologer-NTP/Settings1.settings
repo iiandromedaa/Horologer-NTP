@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Horologer_NTP" GeneratedClassName="Settings1">
+  <Profiles />
+  <Settings>
+    <Setting Name="NTPserver" Type="System.String" Scope="User">
+      <Value Profile="(Default)">time.windows.com</Value>
+    </Setting>
+    <Setting Name="DisplayType" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Alarm0" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">2020-01-01</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

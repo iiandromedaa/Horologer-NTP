@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using static Horologer_NTP.AboutBox1;
 using static Horologer_NTP.Program;
+using static Horologer_NTP.settingsForm;
 
 namespace Horologer_NTP
 {
@@ -85,6 +86,15 @@ namespace Horologer_NTP
                     lagMS.Text = Pinger(NTP).ToString() + " ms";
                 });
                 Thread.Sleep(1000);
+            }
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!SettOpen)
+            {
+                new settingsForm().Show();
+                SettOpen = true;
             }
         }
     }
