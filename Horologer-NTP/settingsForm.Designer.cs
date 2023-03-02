@@ -48,6 +48,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(151, 28);
             this.comboBox1.TabIndex = 1;
+            this.comboBox1.Text = "12 Hour";
             // 
             // cancelButton
             // 

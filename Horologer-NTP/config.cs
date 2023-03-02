@@ -46,5 +46,5 @@ namespace Horologer_NTP
             return Read(Key, Section).Length > 0;
         }
     }
-}       
-    
+}
+
