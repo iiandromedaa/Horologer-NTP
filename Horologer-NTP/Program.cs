@@ -2,6 +2,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 
+
 namespace Horologer_NTP
 {
     internal static class Program
@@ -18,22 +19,25 @@ namespace Horologer_NTP
             //Form1 main = new Form1();
             Application.Run(new Form1());
         }
-        public static double Pinger(string ip)
+        public static async Task<double> Pinger(string ip)
         {
-            Ping Pong = new Ping();
-            try
+            return await Task.Run(() =>
             {
-                PingReply pingReplyping = Pong.Send(ip, 950);
-                if (pingReplyping.Status != IPStatus.Success)
+                Ping Pong = new Ping();
+                try
+                {
+                    PingReply pingReplyping = Pong.Send(ip, 950);
+                    if (pingReplyping.Status != IPStatus.Success)
+                    {
+                        return -1;
+                    }
+                    return pingReplyping.RoundtripTime;
+                }
+                catch (System.Net.NetworkInformation.PingException)
                 {
                     return -1;
                 }
-                return pingReplyping.RoundtripTime;
-            }
-            catch (System.Net.NetworkInformation.PingException)
-            {
-                return -1;
-            }
+            });
         }
         public static DateTime GetNetworkTime2(string ip)
         {
@@ -51,27 +55,27 @@ namespace Horologer_NTP
             //The UDP port number assigned to NTP is 123
             var ipEndPoint = new IPEndPoint(addresses[0], 123);
             //NTP uses UDP
-            try
+            using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
             {
-                using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
+                socket.Connect(ipEndPoint);
+
+                //Stops code hang if NTP is blocked
+                socket.ReceiveTimeout = 2000;
+
+                socket.Send(ntpData);
+                AutoResetEvent flag = new AutoResetEvent(false);
+                Thread sockth = new Thread(() =>
                 {
-                    socket.Connect(ipEndPoint);
-
-                    //Stops code hang if NTP is blocked
-                    socket.ReceiveTimeout = 3000;
-
-                    socket.Send(ntpData);
+                    try { 
                     socket.Receive(ntpData);
-                    socket.Close();
-                }
-            }
-            catch (SocketException e)
-            {
-                return DateTime.Now;
-            }
-            catch (Exception e)
-            {
-                return DateTime.Now;
+                    }
+                    catch (SocketException) { }
+                    flag.Set();
+                });
+                sockth.IsBackground = true;
+                sockth.Start();
+                flag.WaitOne(2000);
+                socket.Close();
             }
             //Offset to get to the "Transmit Timestamp" field (time at which the reply 
             //departed the server for the client, in 64-bit timestamp format."

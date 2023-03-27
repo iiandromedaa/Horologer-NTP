@@ -7,8 +7,6 @@ namespace Horologer_NTP
 {
     public partial class Form1 : Form
     {
-        static IniFile myini = new IniFile("config.ini");
-        public static string NTP = myini.Read("NTP", "settings");
         public Form1()
         {
             InitializeComponent();
@@ -33,7 +31,7 @@ namespace Horologer_NTP
         }
         public void UpdateTime()
         {
-            DateTime server = GetNetworkTime2(NTP);
+            DateTime server = GetNetworkTime2(Properties.Settings1.Default.NTPserver);
             accuracyMS.Text = Beancounter(server).ToString("+#;-#;0") + " ms";
             time.Text = server.ToLocalTime().ToString("hh:mm:ss tt");
         }
@@ -64,7 +62,7 @@ namespace Horologer_NTP
             {
                 var delayTask = Task.Delay(1000, default);
                 //0.north-america.pool.ntp.org
-                UpdatePing(Pinger(NTP));
+                UpdatePing(await Pinger(Properties.Settings1.Default.NTPserver));
                 await delayTask;
             }
         }
@@ -83,7 +81,7 @@ namespace Horologer_NTP
                 //UpdatePing(Pinger(NTP));
                 lagMS.Invoke((MethodInvoker)delegate
                 {
-                    lagMS.Text = Pinger(NTP).ToString() + " ms";
+                    lagMS.Text = Pinger(Properties.Settings1.Default.NTPserver).ToString() + " ms";
                 });
                 Thread.Sleep(1000);
             }
